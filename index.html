@@ -1,107 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
     <title>New Tab</title>
     <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-        }
-        #time {
-            font-size: 4rem;
-            font-weight: 700;
-        }
-        #greeting {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        #urlInput {
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            font-size: 1.2rem;
-            width: 250px;
-            padding: 8px;
-            text-align: center;
-            transition: border-color 0.2s;
-            caret-color: transparent;
-        }
-        #urlInput:focus {
-            outline: none;
-            border-bottom-color: white;
-        }
-        #urlInput:not(:placeholder-shown) {
-            caret-color: white;
-        }
-        #urlInput::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
+body{background:#000;color:#fff;font-family:system-ui,-apple-system,sans-serif;height:100vh;margin:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2rem}
+#t{font-size:4rem;font-weight:700}
+#g{font-size:1.5rem;font-weight:600}
+#u{background:0 0;border:none;border-bottom:2px solid rgba(255,255,255,.3);color:#fff;font-size:1.2rem;width:250px;padding:8px;text-align:center;transition:border-color .2s;caret-color:transparent}
+#u:focus{outline:0;border-bottom-color:#fff}
+#u:not(:placeholder-shown){caret-color:#fff}
+#u::placeholder{color:rgba(255,255,255,.5)}
     </style>
 </head>
 <body>
-    <div id="time"></div>
-    <div id="greeting"></div>
-    <input type="text" id="urlInput" autofocus placeholder="type to search or enter url">
-
-    <script>
-        const name = "Daniel"; // Replace with your name
-
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                hour12: true 
-            });
-            document.getElementById('time').textContent = timeString;
-            
-            const hour = now.getHours();
-            let greeting = "Good ";
-            if (hour < 12) greeting += "morning";
-            else if (hour < 18) greeting += "afternoon";
-            else greeting += "evening";
-            greeting += `, ${name}`;
-            
-            document.getElementById('greeting').textContent = greeting;
-        }
-
-        // handle url input
-        document.getElementById('urlInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const input = e.target.value.trim();
-                if (input) {
-                    // if it looks like a url, go there directly
-                    if (input.includes('.') && !input.includes(' ')) {
-                        window.location.href = input.startsWith('http') ? input : 'https://' + input;
-                    } else {
-                        // otherwise search
-                        window.location.href = `https://www.startpage.com/sp/search?query=${encodeURIComponent(input)}`;
-                    }
-                }
-            }
-        });
-
-        // force focus on load
-        window.addEventListener('load', () => {
-            document.getElementById('urlInput').focus();
-        });
-
-        // also focus when coming back to the tab
-        window.addEventListener('focus', () => {
-            document.getElementById('urlInput').focus();
-        });
-
-        updateTime();
-        setInterval(updateTime, 1000);
-    </script>
+<div id="t"></div>
+<div id="g"></div>
+<input type="text" id="u" autofocus placeholder="type to search or enter url">
+<script>
+const n="Daniel",t=document.getElementById("t"),g=document.getElementById("g"),u=document.getElementById("u");
+function updateTime(){const e=new Date,d=e.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",hour12:!0});t.textContent=d;const h=e.getHours();g.textContent=`Good ${h<12?"morning":h<18?"afternoon":"evening"}, ${n}`}
+u.onkeydown=e=>{"Enter"===e.key&&(e=e.target.value.trim())&&(window.location.href=e.includes(".")&&!e.includes(" ")?e.startsWith("http")?e:"https://"+e:`https://www.startpage.com/sp/search?query=%s${encodeURIComponent(e)}`)}
+window.onload=window.onfocus=_=>u.focus();
+updateTime();
+setInterval(updateTime,1e3);
+</script>
 </body>
 </html>
