@@ -7,7 +7,7 @@
 body{background:#000;color:#fff;font-family:system-ui,-apple-system,sans-serif;height:100vh;margin:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2rem}
 #t{font-size:4rem;font-weight:700}
 #g{font-size:1.5rem;font-weight:600}
-#u{background:0 0;border:none;border-bottom:2px solid rgba(255,255,255,.3);color:#fff;font-size:1.2rem;width:250px;padding:8px;text-align:center;transition:border-color .2s;caret-color:transparent}
+#u{background:0 0;border:none;border-bottom:2px solid rgba(255,255,255,.3);color:#fff;font-size:1.2rem;width:300px;padding:8px;text-align:center;transition:border-color .2s;caret-color:transparent}
 #u:focus{outline:0;border-bottom-color:#fff}
 #u:not(:placeholder-shown){caret-color:#fff}
 #u::placeholder{color:rgba(255,255,255,.5)}
@@ -16,7 +16,7 @@ body{background:#000;color:#fff;font-family:system-ui,-apple-system,sans-serif;h
 <body>
 <div id="t"></div>
 <div id="g"></div>
-<input type="text" id="u" autofocus placeholder="type to search or enter url">
+<input type="text" id="u" autofocus placeholder="Search or enter URL">
 <script>
 const n="Daniel",t=document.getElementById("t"),g=document.getElementById("g"),u=document.getElementById("u");
 function updateTime(){const e=new Date,d=e.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",hour12:!0});t.textContent=d;const h=e.getHours();g.textContent=`Good ${h<12?"morning":h<18?"afternoon":"evening"}, ${n}`}
