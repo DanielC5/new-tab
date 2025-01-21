@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Tab</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+        #time {
+            font-size: 4rem;
+            font-weight: 700;
+        }
+        #greeting {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        #urlInput {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1.2rem;
+            width: 250px;
+            padding: 8px;
+            text-align: center;
+            transition: border-color 0.2s;
+            caret-color: transparent;
+        }
+        #urlInput:focus {
+            outline: none;
+            border-bottom-color: white;
+        }
+        #urlInput:not(:placeholder-shown) {
+            caret-color: white;
+        }
+        #urlInput::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="time"></div>
+    <div id="greeting"></div>
+    <input type="text" id="urlInput" autofocus placeholder="type to search or enter url">
+
+    <script>
+        const name = "Daniel"; // Replace with your name
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: true 
+            });
+            document.getElementById('time').textContent = timeString;
+            
+            const hour = now.getHours();
+            let greeting = "Good ";
+            if (hour < 12) greeting += "morning";
+            else if (hour < 18) greeting += "afternoon";
+            else greeting += "evening";
+            greeting += `, ${name}`;
+            
+            document.getElementById('greeting').textContent = greeting;
+        }
+
+        // handle url input
+        document.getElementById('urlInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const input = e.target.value.trim();
+                if (input) {
+                    // if it looks like a url, go there directly
+                    if (input.includes('.') && !input.includes(' ')) {
+                        window.location.href = input.startsWith('http') ? input : 'https://' + input;
+                    } else {
+                        // otherwise search
+                        window.location.href = `https://www.startpage.com/sp/search?query=${encodeURIComponent(input)}`;
+                    }
+                }
+            }
+        });
+
+        // force focus on load
+        window.addEventListener('load', () => {
+            document.getElementById('urlInput').focus();
+        });
+
+        // also focus when coming back to the tab
+        window.addEventListener('focus', () => {
+            document.getElementById('urlInput').focus();
+        });
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
