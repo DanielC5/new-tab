@@ -20,7 +20,7 @@ body{background:#000;color:#fff;font-family:system-ui,-apple-system,sans-serif;h
 <script>
 const n="Daniel",t=document.getElementById("t"),g=document.getElementById("g"),u=document.getElementById("u");
 function updateTime(){const e=new Date,d=e.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit",hour12:!0});t.textContent=d;const h=e.getHours();g.textContent=`Good ${h<12?"morning":h<18?"afternoon":"evening"}, ${n}`}
-u.onkeydown=e=>{"Enter"===e.key&&(e=e.target.value.trim())&&(window.location.href=e.includes(".")&&!e.includes(" ")?e.startsWith("http")?e:"https://"+e:`https://www.startpage.com/sp/search?query=%s${encodeURIComponent(e)}`)}
+u.onkeydown=e=>{"Enter"===e.key&&(e=e.target.value.trim())&&(window.location.href=e.includes(".")&&!e.includes(" ")?e.startsWith("http")?e:"https://"+e:`https://www.startpage.com/sp/search?query=${encodeURIComponent(e)}`)}
 window.onload=window.onfocus=_=>u.focus();
 updateTime();
 setInterval(updateTime,1e3);
